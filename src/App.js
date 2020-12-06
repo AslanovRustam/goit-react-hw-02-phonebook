@@ -1,26 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Form from './Form/Form';
 
-function App() {
-  return (
-    <h1>Hello</h1>
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
-  );
+class App extends Component {
+  state = {
+    contacts: [],
+    name: '',
+  };
+
+  formSubmitHandler = data => {
+    console.log(data);
+  };
+  // handleNameChange = event => {
+  //   this.setState({ name: event.currentTarget.value });
+  // };
+  // handleNamberChange = event => {
+  //   this.setState({ number: event.currentTarget.value });
+  // };
+
+  render() {
+    return (
+      <>
+        <Form onSubmit={this.formSubmitHandler} />
+      </>
+    );
+  }
 }
 
 export default App;
