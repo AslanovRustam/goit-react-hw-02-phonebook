@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import shortid from 'shortid';
 import Form from './Form/Form';
 
 class App extends Component {
@@ -7,15 +8,21 @@ class App extends Component {
     name: '',
   };
 
+  // addContact = (name, number) => {
+  //   const contact = {
+  //     id: shortid.generate(),
+  //     name,
+  //     number,
+  //   };
+
+  //   this.setState(({ contacts }) => ({
+  //     contacts: [contact, ...contacts],
+  //   }));
+  // };
+
   formSubmitHandler = data => {
     console.log(data);
   };
-  // handleNameChange = event => {
-  //   this.setState({ name: event.currentTarget.value });
-  // };
-  // handleNamberChange = event => {
-  //   this.setState({ number: event.currentTarget.value });
-  // };
 
   render() {
     return (

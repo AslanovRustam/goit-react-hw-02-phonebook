@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import s from './form.module.css';
+import shortid from 'shortid';
 
 class Form extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
 
   handleChange = event => {
@@ -22,6 +24,8 @@ class Form extends Component {
     this.props.onSubmit(this.state);
     this.reset();
   };
+
+  contactInputId = shortid.generate();
   // handleNameChange = event => {
   //   this.setState({ name: event.currentTarget.value });
   // };
@@ -41,6 +45,7 @@ class Form extends Component {
               name="name"
               value={this.state.name}
               onChange={this.handleChange}
+              id={this.contactInputId}
             ></input>
           </label>
           <label>
