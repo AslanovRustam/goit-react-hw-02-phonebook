@@ -3,7 +3,8 @@ import s from './contacs.module.css';
 
 const Contactlist = ({ contacts, onDeleteContact }) => {
   return (
-    <>
+    <div className={s.contactsList}>
+      <h2>Contacts</h2>
       <span>Total number of contacts - {contacts.length}</span>
       <ul className={s.list}>
         {contacts.map(({ id, name, number }) => (
@@ -19,7 +20,7 @@ const Contactlist = ({ contacts, onDeleteContact }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

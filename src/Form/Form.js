@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import s from './form.module.css';
 import shortid from 'shortid';
 
@@ -7,6 +8,16 @@ class Form extends Component {
     contacts: [],
     name: '',
     number: '',
+  };
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    contacts: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired,
+      }),
+    ),
   };
 
   handleChange = event => {
@@ -19,19 +30,44 @@ class Form extends Component {
     this.setState({ contacts: [], name: '', number: '' });
   };
 
+  // contactMatch = () => {
+  //   if (
+  //     this.state.contacts
+  //       .reduce((acc, contact) => [...acc, contact.name], [])
+  //       .includes(this.state.name)
+  //   ) {
+  //     alert(`${this.state.name} is already in contacts`);
+  //     return true;
+  //   }
+  // };
+  contactMatching = () => {
+    const { name } = this.state;
+    const { contacts } = this.props;
+    const namesInPhonebook = contacts.reduce(
+      (acc, contact) => [...acc, contact.name],
+      [],
+    );
+    if (namesInPhonebook.includes(name)) {
+      alert(`${name} is already in contacts`);
+      return true;
+    }
+  };
+
   handleSubmitForm = event => {
+    const { name, number } = this.state;
+
     event.preventDefault();
-    this.props.onSubmit(this.state);
+    this.setState({ name: '', number: '' });
+    if (this.contactMatching()) {
+      return;
+    }
+
+    this.props.onSubmit(this.state.name, this.state.number);
+    // this.props.onSubmit(this.state.number);
     this.reset();
   };
 
   contactInputId = shortid.generate();
-  // handleNameChange = event => {
-  //   this.setState({ name: event.currentTarget.value });
-  // };
-  // handleNamberChange = event => {
-  //   this.setState({ number: event.currentTarget.value });
-  // };
 
   render() {
     return (
