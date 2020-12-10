@@ -29,8 +29,8 @@ class Form extends Component {
   reset = () => {
     this.setState({ contacts: [], name: '', number: '' });
   };
-
-  // contactMatch = () => {
+  ///////////////////////////////
+  // contactMatching = () => {
   //   if (
   //     this.state.contacts
   //       .reduce((acc, contact) => [...acc, contact.name], [])
@@ -40,30 +40,32 @@ class Form extends Component {
   //     return true;
   //   }
   // };
-  contactMatching = () => {
-    const { name } = this.state;
-    const { contacts } = this.props;
-    const namesInPhonebook = contacts.reduce(
-      (acc, contact) => [...acc, contact.name],
-      [],
-    );
-    if (namesInPhonebook.includes(name)) {
-      alert(`${name} is already in contacts`);
-      return true;
-    }
-  };
+
+  // contactMatching = () => {
+  //   const { name } = this.state;
+  //   const { contacts } = this.props;
+  //   // const namesInPhonebook = contacts.reduce(
+  //   //   (acc, contact) => [...acc, contact.name],
+  //   //   [],
+  //   // );
+  //   const namesInPhonebook = this.state.contacts.find(
+  //     contact => contact.name === name,
+  //   );
+  //   if (namesInPhonebook) {
+  //     alert(`${name} is already in contacts`);
+  //     return true;
+  //   }
+  // };
 
   handleSubmitForm = event => {
     const { name, number } = this.state;
 
     event.preventDefault();
-    this.setState({ name: '', number: '' });
-    if (this.contactMatching()) {
-      return;
-    }
+    // if (this.contactMatching()) {
+    //   return;
+    // }
 
-    this.props.onSubmit(this.state.name, this.state.number);
-    // this.props.onSubmit(this.state.number);
+    this.props.onSubmit(name, number);
     this.reset();
   };
 

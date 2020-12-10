@@ -35,6 +35,13 @@ class App extends Component {
     }));
   };
 
+  // onAddContact = (name, number) => {
+  //   console.log({ name, number });
+  //   const contact = {
+  //     id: shortid.generate(),
+  //     name: name,
+  //     number: number,
+  //   };
   onAddContact = (name, number) => {
     console.log({ name, number });
     const contact = {
@@ -43,9 +50,21 @@ class App extends Component {
       number: number,
     };
 
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts],
-    }));
+    const getContacts = this.state.contacts.map(contact =>
+      contact.name.toLocaleLowerCase(),
+    );
+
+    const isGetContactAlready = getContacts.includes(name.toLocaleLowerCase());
+
+    if (isGetContactAlready) {
+      alert(`${name} is already in contacts!`);
+    } else {
+      this.setState(prevState => {
+        return {
+          contacts: [contact, ...prevState.contacts],
+        };
+      });
+    }
   };
 
   onChangeFilter = e => {
